@@ -10,13 +10,16 @@ const getSeason = (lat, month) => {
 };
 
 const SeasonDisplay = ({ lat }) => {
-  const season = getSeason(lat, new Date().getMonth());
+  const month = new Date().getMonth();
+  const season = getSeason(lat, month);
 
   console.log(season);
-  
+
   return (
     <div>
-      Season display
+      {season === 'winter'
+        ? 'Burr, it is chilly'
+        : 'Lets hit the beach'}
     </div>
   );
 };

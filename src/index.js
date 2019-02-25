@@ -24,7 +24,7 @@ render() {
     <div>
       {lat && <SeasonDisplay lat={lat}/>}
       {errorMessage && <p>Error: {errorMessage}</p>}
-      {!lat && !errorMessage && <Spinner/>}
+      {!lat && !errorMessage && <Spinner message="Please accept location request"/>}
     </div>
   );
 }

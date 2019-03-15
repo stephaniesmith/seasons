@@ -1,24 +1,18 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom'; 
 import SeasonDisplay from './SeasonDisplay';
 import Spinner from './Spinner';
 
-class App extends Component {
-state = {
-  lat: null,
-  errorMessage: ''
-};
+const App = () => {
+  const [lat, setLat] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
 
-componentDidMount() {
-  window.navigator.geolocation.getCurrentPosition(
-    ({ coords }) => this.setState({ lat: coords.latitude }),
-    ({ message }) => this.setState({ errorMessage: message })
-  );
-
-}
-
-render() {
-  const { lat, errorMessage } = this.state;
+  useEffect(() => {
+    window.navigator.geolocation.getCurrentPosition(
+      ({ coords }) => setLat(coords.latitude),
+      ({ message }) => setErrorMessage(message)
+    );
+  }, []);
 
   return (
     <div>
@@ -27,7 +21,6 @@ render() {
       {!lat && !errorMessage && <Spinner message="Please accept location request"/>}
     </div>
   );
-}
-}
+};
 
 ReactDOM.render(<App />, document.getElementById('root'));
